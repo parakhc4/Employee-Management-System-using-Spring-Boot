@@ -31,9 +31,6 @@ public class StatusReport {
     @NotNull(message = "Enter Date of creation")
     private LocalDate createDate;
 
-    @NotNull(message = "Enter Compliance-id")
-    private int id;
-
     @OneToOne(targetEntity = Compliance.class,cascade = CascadeType.ALL)
     @JoinColumn(name="compliance",referencedColumnName = "complianceid")
     @NotNull(message = "Enter Compliance-id")
