@@ -23,6 +23,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee addEmployee(Employee employee) {
         employeeRepository.save(employee);
+        //two way relationship
+        //many to one - (dept - emp)
+        //
         return employee;
     }
 

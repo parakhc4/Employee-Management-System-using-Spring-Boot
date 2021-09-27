@@ -7,6 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//one to many
+// mappedBy
+
+
+
+
 @Data
 @Entity
 @Table(name = "deptTable")
