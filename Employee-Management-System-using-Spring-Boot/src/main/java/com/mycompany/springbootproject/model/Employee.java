@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "empTable")
+@Table(name = "empTable") // specifies the name of the database table to be used for mapping.
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
