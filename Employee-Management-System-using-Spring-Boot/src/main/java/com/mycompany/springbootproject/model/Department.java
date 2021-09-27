@@ -2,10 +2,7 @@ package com.mycompany.springbootproject.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 //one to many
 // mappedBy
@@ -18,6 +15,7 @@ import javax.persistence.Table;
 @Table(name = "deptTable")
 public class Department{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "departId", nullable = false)
     private int departId;
     private String departName;

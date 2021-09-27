@@ -48,7 +48,7 @@ public class DepartmentController {
         return new ResponseEntity<>(dept, HttpStatus.CREATED);
     }
 
-
+// annotations, working (mapping, layers, MVC, JPA)
     @ApiOperation("Delete A department")
     @DeleteMapping("/delete/{departId}")
     public ResponseEntity<Void> delete(@PathVariable int departId){
