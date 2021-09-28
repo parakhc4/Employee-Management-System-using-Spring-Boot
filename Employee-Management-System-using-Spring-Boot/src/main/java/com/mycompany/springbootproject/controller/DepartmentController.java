@@ -1,15 +1,12 @@
 package com.mycompany.springbootproject.controller;
 
 import com.mycompany.springbootproject.model.Department;
-import com.mycompany.springbootproject.model.Employee;
 import com.mycompany.springbootproject.service.DepartmentService;
-import com.mycompany.springbootproject.service.EmployeeService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +29,12 @@ public class DepartmentController {
     public List<Department> getDepartments() {
         log.info("INSIDE getDepartments");
         return departmentService.getAllDepartments();
+    }
+
+    @ApiOperation("Get A Department By ID") // annotation to describe the endpoint and its response type
+    @GetMapping("/getbyid/{id}")  // annotation that acts as a shortcut for @RequestMapping.
+    public Department fetchById(@PathVariable int id) {
+        return departmentService.fetchById(id);
     }
 
     @GetMapping("/getcount") // annotation that acts as a shortcut for @RequestMapping.
