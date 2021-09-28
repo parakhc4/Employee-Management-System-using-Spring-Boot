@@ -1,6 +1,7 @@
 package com.mycompany.springbootproject.service;
 
 import com.mycompany.springbootproject.model.Compliance;
+import com.mycompany.springbootproject.model.Employee;
 import com.mycompany.springbootproject.model.StatusReport;
 import com.mycompany.springbootproject.repository.ComplianceRepository;
 import com.mycompany.springbootproject.repository.DepartmentRepository;
@@ -9,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ComplianceServiceImpl implements ComplianceService{
+class ComplianceServiceImpl implements ComplianceService{
 
     @Autowired
     private ComplianceRepository complianceRepository;
@@ -30,18 +32,18 @@ public class ComplianceServiceImpl implements ComplianceService{
     }
 
     @Override
-    public List<Compliance> getAllRL(int id) {
-        return null;
+    public Compliance getAllRL(int id) {
+        Compliance compliance = null;
+        Optional<Compliance> optionalCompliance = complianceRepository.findById(id);
+        if (optionalCompliance.isPresent()) {
+            compliance = optionalCompliance.get();
+        }
+        return compliance;
     }
 
     @Override
     public StatusReport createStatusReport(StatusReport statusReport) {
         statusReportRepository.save(statusReport);
         return statusReport;
-    }
-
-    @Override
-    public List<StatusReport> getAllStatusReport() {
-        return null;
     }
 }

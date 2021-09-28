@@ -32,9 +32,8 @@ public class StatusReport {
     private LocalDate createDate;
 
     @OneToOne(targetEntity = Compliance.class,cascade = CascadeType.ALL)
-    @JoinColumn(name="compliance",referencedColumnName = "complianceid")
-    @NotNull(message = "Enter Compliance-id")
-    private int complianceId;
+    @JoinColumn(name="complianceid")
+    public Compliance compliance;
 
     @ManyToOne(targetEntity = Department.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "deptTable", referencedColumnName = "departId")

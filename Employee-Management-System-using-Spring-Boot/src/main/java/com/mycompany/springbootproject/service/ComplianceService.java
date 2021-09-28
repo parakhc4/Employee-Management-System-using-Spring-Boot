@@ -12,10 +12,10 @@ public interface ComplianceService {
 
     public List<Compliance> getAllRL();
 
-    public List<Compliance> getAllRL(int id);
+    public Compliance getAllRL(int id);
 
     public StatusReport createStatusReport(StatusReport statusReport);
 
-    public List<StatusReport> getAllStatusReport();
+//    public List<StatusReport> getAllStatusReport();
 
 }

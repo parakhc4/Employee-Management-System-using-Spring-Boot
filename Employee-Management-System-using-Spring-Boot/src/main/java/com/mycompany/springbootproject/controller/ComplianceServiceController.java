@@ -1,6 +1,7 @@
 package com.mycompany.springbootproject.controller;
 
 import com.mycompany.springbootproject.model.Compliance;
+import com.mycompany.springbootproject.model.Employee;
 import com.mycompany.springbootproject.model.StatusReport;
 import com.mycompany.springbootproject.service.ComplianceService;
 import io.swagger.annotations.ApiOperation;
@@ -32,18 +33,25 @@ public class ComplianceServiceController {
         return complianceService.getAllRL();
     }
 
+    @ApiOperation("Get A Employee By ID")
+    @GetMapping("/getbyid/{id}")
+    public Compliance getById(@PathVariable int id) {
+        return complianceService.getAllRL(id);
+    }
+
+
     @ApiOperation("Save a New Compliance Record.")
     @PostMapping("/create/compliance")
-    public ResponseEntity<Compliance> createDepartment(@Valid @RequestBody Compliance compliance) {
-        log.info("Inside Employee %s", compliance);
+    public ResponseEntity<Compliance> createCompliance(@Valid @RequestBody Compliance compliance) {
+
         Compliance comp = complianceService.createRL(compliance);
         return new ResponseEntity<>(comp, HttpStatus.CREATED);
     }
 
     @ApiOperation("Save a New Compliance Record.")
     @PostMapping("/create/status")
-    public ResponseEntity<StatusReport> createDepartment(@Valid @RequestBody StatusReport statusReport) {
-        log.info("Inside Employee %s", statusReport);
+    public ResponseEntity<StatusReport> createStatus(@Valid @RequestBody StatusReport statusReport) {
+
         StatusReport stat = complianceService.createStatusReport(statusReport);
         return new ResponseEntity<>(stat, HttpStatus.CREATED);
     }

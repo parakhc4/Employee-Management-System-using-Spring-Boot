@@ -18,7 +18,7 @@ import java.util.List;
 public class Compliance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int complianceid;
+    public int complianceid;
 
     @Size(min = 2, max = 20)
     @NotNull(message = "Enter Regulation/Legislation Type")
