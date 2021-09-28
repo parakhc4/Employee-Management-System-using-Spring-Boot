@@ -1,5 +1,6 @@
 package com.mycompany.springbootproject.controller;
 
+import com.mycompany.springbootproject.exceptions.EmployeeNotFoundException;
 import com.mycompany.springbootproject.model.Employee;
 import com.mycompany.springbootproject.service.EmployeeService;
 import io.swagger.annotations.ApiOperation;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-//RESTful APIs
 //RESTful APIs
 @Slf4j // It offers a generic API making the logging independent of the actual implementation.
 @Controller // allows us to auto-detect implementation classes through the classpath scanning.
@@ -40,10 +40,21 @@ public class EmployeeController {
         return new ResponseEntity<>(cust, HttpStatus.CREATED);
     }
 
+
     @ApiOperation("Get A Employee By ID") // annotation to describe the endpoint and its response type
     @GetMapping("/getbyid/{id}")  // annotation that acts as a shortcut for @RequestMapping.
-    public Employee fetchById(@PathVariable int id) {
-        return employeeService.fetchById(id);
+    public Employee fetchById(@PathVariable int id) throws EmployeeNotFoundException {
+
+        try{
+            if (employeeService.fetchById(id)==null){
+                throw new EmployeeNotFoundException("Employee not found");
+            }
+            return employeeService.fetchById(id);
+        }
+        catch (EmployeeNotFoundException e){
+            System.out.println(e.getCause());
+            return employeeService.fetchById(id);
+        }
     }
 
     @ApiOperation("Update An Existing Employee")

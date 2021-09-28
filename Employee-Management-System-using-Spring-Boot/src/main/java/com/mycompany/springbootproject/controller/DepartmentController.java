@@ -1,5 +1,6 @@
 package com.mycompany.springbootproject.controller;
 
+import com.mycompany.springbootproject.exceptions.DepartmentNotFoundException;
 import com.mycompany.springbootproject.model.Department;
 import com.mycompany.springbootproject.service.DepartmentService;
 import io.swagger.annotations.ApiOperation;
@@ -33,8 +34,17 @@ public class DepartmentController {
 
     @ApiOperation("Get A Department By ID") // annotation to describe the endpoint and its response type
     @GetMapping("/getbyid/{id}")  // annotation that acts as a shortcut for @RequestMapping.
-    public Department fetchById(@PathVariable int id) {
-        return departmentService.fetchById(id);
+    public Department fetchById(@PathVariable int id) throws DepartmentNotFoundException {
+        try{
+            if(departmentService.fetchById(id)==null){
+                throw new DepartmentNotFoundException("Department not found");
+            }
+            return departmentService.fetchById(id);
+        }
+        catch (DepartmentNotFoundException e){
+            System.out.println(e.getCause());
+            return departmentService.fetchById(id);
+        }
     }
 
     @GetMapping("/getcount") // annotation that acts as a shortcut for @RequestMapping.
