@@ -11,17 +11,17 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@Entity
-@Table(name = "compTable")
+@Data // generates all the boilerplate that is normally associated with simple POJOs
+@NoArgsConstructor // will generate a constructor with no parameters
+@Entity // annotation specifies that the class is an entity and is mapped to a database table
+@Table(name = "compTable") // specifies the name of the database table to be used for mapping
 public class Compliance {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id // annotation specifies the primary key of an entity
+    @GeneratedValue(strategy = GenerationType.AUTO) // annotation provides for the specification of generation strategies for the values of primary keys
     public int complianceid;
 
-    @Size(min = 2, max = 20)
-    @NotNull(message = "Enter Regulation/Legislation Type")
+    @Size(min = 2, max = 20) // specifies the range of the variable
+    @NotNull(message = "Enter Regulation/Legislation Type") // does not permit to pass a null value
     private String rlType;
 
     @Size(min = 2, max = 20)
@@ -31,8 +31,8 @@ public class Compliance {
     @NotNull(message = "Enter Date of creation")
     private LocalDate createDate;
 
-    @ManyToOne(targetEntity = Department.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "deptTable", referencedColumnName = "departId")
+    @ManyToOne(targetEntity = Department.class, cascade = CascadeType.ALL) // annotations define many to one relations
+    @JoinColumn(name = "deptTable", referencedColumnName = "departId") // marks a column for as a join column for an entity association or an element collection.
     private Department department;
 
     @NotNull(message = "Enter employee count")

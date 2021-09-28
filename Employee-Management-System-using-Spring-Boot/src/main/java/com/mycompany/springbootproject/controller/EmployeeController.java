@@ -15,32 +15,33 @@ import javax.validation.Valid;
 import java.util.List;
 
 //RESTful APIs
-@Slf4j
-@Controller
-@ResponseBody
-@RequestMapping("employees")
+//RESTful APIs
+@Slf4j // It offers a generic API making the logging independent of the actual implementation.
+@Controller // allows us to auto-detect implementation classes through the classpath scanning.
+@ResponseBody // tells a controller that the object returned is automatically serialized into JSON and passed back into the HttpResponse object.
+@RequestMapping("employees") // the annotation is used to map web requests to Spring Controller methods.
 public class EmployeeController {
 
-    @Autowired
+    @Autowired // Enabling annotation injection, we can use autowiring on properties, setters, and constructors.
     private EmployeeService employeeService;
 
-    @GetMapping("/getall")
-    @ApiOperation("Fetch All Employee Records")
+    @GetMapping("/getall") // annotation that acts as a shortcut for @RequestMapping.
+    @ApiOperation("Fetch All Employee Records") // annotation to describe the endpoint and its response type
     public List<Employee> getEmployees() {
         log.info("INSIDE getEmployees!!");
         return employeeService.getAll();
     }
 
-    @ApiOperation("Save a New Employee Record!")
-    @PostMapping("/create")
+    @ApiOperation("Save a New Employee Record!") // annotation to describe the endpoint and its response type
+    @PostMapping("/create") // Annotation for mapping HTTP POST requests onto specific handler methods.
     public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee) {
         log.info("Inside Employee %s", employee);
         Employee cust = employeeService.addEmployee(employee);
         return new ResponseEntity<>(cust, HttpStatus.CREATED);
     }
 
-    @ApiOperation("Get A Employee By ID")
-    @GetMapping("/getbyid/{id}")
+    @ApiOperation("Get A Employee By ID") // annotation to describe the endpoint and its response type
+    @GetMapping("/getbyid/{id}")  // annotation that acts as a shortcut for @RequestMapping.
     public Employee fetchById(@PathVariable int id) {
         return employeeService.fetchById(id);
     }

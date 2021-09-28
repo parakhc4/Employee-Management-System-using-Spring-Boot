@@ -17,17 +17,17 @@ import javax.validation.Valid;
 import java.util.List;
 
 //RESTful APIs
-@Slf4j
-@Controller
-@ResponseBody
-@RequestMapping("compliance")
+@Slf4j // It offers a generic API making the logging independent of the actual implementation.
+@Controller // allows us to auto-detect implementation classes through the classpath scanning.
+@ResponseBody // tells a controller that the object returned is automatically serialized into JSON and passed back into the HttpResponse object.
+@RequestMapping("compliance")  // the annotation is used to map web requests to Spring Controller methods.
 public class ComplianceServiceController {
 
-    @Autowired
+    @Autowired // Enabling annotation injection, we can use autowiring on properties, setters, and constructors.
     private ComplianceService complianceService;
 
-    @GetMapping("/getall")
-    @ApiOperation("Fetch All Compliance Records")
+    @GetMapping("/getall") // annotation that acts as a shortcut for @RequestMapping.
+    @ApiOperation("Fetch All Compliance Records")  // annotation to describe the endpoint and its response type
     public List<Compliance> getDepartments() {
         log.info("INSIDE getDepartments");
         return complianceService.getAllRL();
@@ -41,7 +41,7 @@ public class ComplianceServiceController {
 
 
     @ApiOperation("Save a New Compliance Record.")
-    @PostMapping("/create/compliance")
+    @PostMapping("/create/compliance") // Annotation for mapping HTTP POST requests onto specific handler methods.
     public ResponseEntity<Compliance> createCompliance(@Valid @RequestBody Compliance compliance) {
 
         Compliance comp = complianceService.createRL(compliance);
