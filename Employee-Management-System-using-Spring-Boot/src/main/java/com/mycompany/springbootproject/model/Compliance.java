@@ -43,6 +43,7 @@ public class Compliance {
 
     @NotNull(message = "Enter Status")
     private String status;
+    //our current status or current position
 
 
 }
